@@ -48,7 +48,7 @@ The list in our case includes the built-in providers (opal_common.fetcher.provid
 
 Your DataSourceEntry objects (either in OPAL_DATA_CONFIG_SOURCES or in dynamic updates sent via the OPAL publish API) can now include this fetcher's config.
 
-Example value of OPAL_DATA_CONFIG_SOURCES (formatted nicely, but in the env var you should pack this to one line and remove spaces):
+The example value of OPAL_DATA_CONFIG_SOURCES (formatted nicely, but in the env var you should pack this to one line and remove spaces):
 {
     "config": 
     {
@@ -67,6 +67,7 @@ Example value of OPAL_DATA_CONFIG_SOURCES (formatted nicely, but in the env var 
         ]
     }
 }
+
 
 
 Notice how config is an instance of SQLiteFetcherConfig (code is in opal_fetcher_sqlite/provider.py).
