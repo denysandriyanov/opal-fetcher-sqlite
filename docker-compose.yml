@@ -1,8 +1,12 @@
 version: "3.8"
 services:
+  broadcast_channel:
+    image: redis:5
   opal_server:
     image: authorizon/opal-server:latest
     environment:
+      # the broadcast backbone uri used by opal server workers (see comments above for: broadcast_channel)
+      - OPAL_BROADCAST_URI=redis://broadcast_channel:6379
       - UVICORN_NUM_WORKERS=4
       - OPAL_POLICY_REPO_URL=https://github.com/permitio/opal-example-policy-repo
       - OPAL_POLICY_REPO_POLLING_INTERVAL=30
@@ -17,8 +21,6 @@ services:
       - OPAL_SERVER_URL=http://opal_server:7002
       - OPAL_FETCH_PROVIDER_MODULES=opal_common.fetcher.providers,opal_fetcher_sqlite.provider
       - OPAL_INLINE_OPA_LOG_FORMAT=http
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     ports:
       - "7000:7000"
       - "8181:8181"
@@ -26,6 +28,6 @@ services:
       - opal_server
     volumes:
       - ./opal.db:/db/opal.db
-        # this command is not necessary when deploying OPAL for real, it is simply a trick for dev environments
+      # this command is not necessary when deploying OPAL for real, it is simply a trick for dev environments
     # to make sure that opal-server is already up before starting the client.
     command: sh -c "/start.sh"
