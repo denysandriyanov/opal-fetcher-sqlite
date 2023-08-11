@@ -81,6 +81,9 @@ Values for this fetcher config:
 * The `url` is an SQLite database file path.
 * Your `config` must include the `fetcher` key to indicate to OPAL that you use a custom fetcher.
 * Your `config` must include the `query` key to indicate what query to run against SQLite.
+* Optional: Include the `connection_params` key to specify database connection parameters.
+* Optional: Include the `fetch_one` key and set it to True if you want to fetch only one row.
+* Optional: Include the `fetch_key key to transform data to Object format using a specific column as a key.
 
 
 ### 📖 About OPAL (Open Policy Administration Layer)
